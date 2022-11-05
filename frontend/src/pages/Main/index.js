@@ -1,5 +1,10 @@
 import NavBar from "../../components/MainNav";
 
 export default function Main() {
-  return <NavBar />;
+  return (
+    <div>
+      <NavBar />
+      <NavBar />
+    </div>
+  );
 }
