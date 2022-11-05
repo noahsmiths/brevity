@@ -14,6 +14,14 @@ export default function EmailCard(props) {
     color = "#24A0ED";
   }
 
+  //psueodcode
+  // let loginButton;
+  // if (loggedIn) {
+  //   <button>Connected</button>;
+  // } else {
+  //   <button>Sign Up</button>;
+  // }
+
   return (
       <div className="card w-full mt-1 bg-base-100 scale-95 shadow-md p-3 flex-row hover:cursor-pointer border-0.2 border-softgray">
         <div class="w-11 pr-2 flex items-center justify-center">
@@ -30,6 +38,11 @@ export default function EmailCard(props) {
             {(isConnected) ? "Disconnect" : "Connect"}
           </button>
         </div>
+        <div className="bg-flex">
+          <p className="text-lg text-black">Gmail</p>
+          <p className="text-sm text-gray-700">Login for Gmail</p>
+        </div>
+        <div>{/* loginButton */}</div>
       </div>
   );
 }
