@@ -15,6 +15,14 @@ export default function LoginCard(props) {
     color = "#FF9494";
   }
 
+  //psueodcode
+  let loginButton;
+  if (loggedIn) {
+    <button>Connected</button>;
+  } else {
+    <button>Sign Up</button>;
+  }
+
   return (
     <div>
       <div className="card w-96 bg-base-100 p-3 flex-row hover:underline hover:cursor-pointer">
@@ -32,9 +40,7 @@ export default function LoginCard(props) {
           <p className="text-lg text-black">Gmail</p>
           <p className="text-sm text-gray-700">Login for Gmail</p>
         </div>
-        <div>
-          <button>hey</button>
-        </div>
+        <div>{/* loginButton */}</div>
       </div>
       <div className="card w-96 bg-base-100 p-3 flex-row hover:underline hover:cursor-pointer">
         <div className="w-11 pr-2">
@@ -51,9 +57,7 @@ export default function LoginCard(props) {
           <p className="text-lg text-black">Outlook</p>
           <p className="text-sm text-gray-700">Login for Outlook</p>
         </div>
-        <div>
-          <button>hey</button>
-        </div>
+        <div>{/* loginButton */}</div>
       </div>
     </div>
   );
