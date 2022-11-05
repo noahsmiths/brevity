@@ -8,7 +8,19 @@ import Settings from "./pages/Settings";
 
 function App() {
   return (
-    <Main />
+    <Routes>
+      <Route path="/" element={
+        <div>
+          <Main />
+        </div>
+
+      } />
+      <Route path="/settings" element={
+        <div>
+          <Settings />
+        </div>
+      } />
+    </Routes>
   );
 }
 
