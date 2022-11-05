@@ -31,6 +31,7 @@ const NavBar = () => {
             </ul>
           </div>
           <a className="btn btn-ghost rounded-btn">Gear Icon</a>
+          <i class="fa-solid fa-arrow-left"></i>
         </div>
       </div>
     </div>
