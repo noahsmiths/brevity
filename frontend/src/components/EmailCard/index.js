@@ -6,7 +6,7 @@ export default function EmailCard(props) {
   const subject = props.subject;
   const summary = props.summary;
   const score = props.score;
-  const normMagnitude = props.normMangitude;
+  const normMagnitude = props.normMagnitude;
 
   var color;
   if (score > 0) {
