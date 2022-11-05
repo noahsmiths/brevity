@@ -16,7 +16,7 @@ export default function EmailCard(props) {
   }
 
   return (
-    <div className="card w-full mt-2 bg-base-300 scale-95 shadow-xl p-3 flex flex-row hover:underline hover:cursor-pointer hover:scale-100">
+    <div className="card w-full mt-2 bg-base-100 scale-95 shadow-md p-3 flex flex-row hover:underline hover:cursor-pointer hover:scale-100 border-softgray border-0.2">
       <div class="w-11 pr-2">
         <div class="rounded-full mt-3 h-6 w-6 ml-1 bg-success"></div>
       </div>
