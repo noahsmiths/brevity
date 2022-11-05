@@ -1,3 +1,5 @@
+import { faCalendar } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from "react";
 
 export default function EmailCard(props) {
@@ -16,15 +18,20 @@ export default function EmailCard(props) {
   }
 
   return (
-    <div className="card w-full mt-2 bg-base-300 scale-95 shadow-xl p-3 flex flex-row hover:underline hover:cursor-pointer hover:scale-100">
+    <div className="card w-full mt-2 bg-base-100 border-0.2 border-softgray scale-95 shadow-xl p-3 flex flex-row hover:underline hover:cursor-pointer hover:scale-100">
       <div class="w-11 pr-2">
-        <div class="rounded-full mt-3 h-6 w-6 ml-1 bg-success"></div>
+        <div class="rounded-full mt-6 h-6 w-6 ml-1 bg-success"></div>
       </div>
       <div class="flex flex-col">
         <p class="text-lg font-bold">Example subject</p>
-        <p class="text-sm ">Example summary</p>
+        <p class="text-sm w-full">fdkjkjb s sdjk snd ksjbd skjk sdn sldkns lkdns lkdnsl dns dlksn dlsknd jdbsk jb </p>
       </div>
-      <p class="ml-32">Tuesday, July 25th</p>
+      <div className="flex">
+        <div className="tooltip" data-tip="January 24th, 2022">
+          <FontAwesomeIcon className="mr-1 mx-auto" icon={faCalendar} />
+        </div>
+      </div>
+
 
     </div>
   );
