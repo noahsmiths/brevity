@@ -20,12 +20,12 @@ export default function EmailCard(props) {
       <div class="w-11 pr-2">
         <div class="rounded-full mt-3 h-6 w-6 ml-1 bg-success"></div>
       </div>
-      <div class="">
-        <p class="text-lg text-black">Example subject</p>
-        <p class="text-sm text-gray-700">Example summary</p>
-        <div>
-        </div>
+      <div class="flex flex-col">
+        <p class="text-lg font-bold">Example subject</p>
+        <p class="text-sm ">Example summary</p>
       </div>
+      <p class="ml-32">Tuesday, July 25th</p>
+
     </div>
   );
 }
