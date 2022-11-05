@@ -1,7 +1,7 @@
 import { useHistory } from "react-router-dom";
 
 export default function SettingsNav() {
-  const feather = require("feather-icons");
+  // const feather = require('feather-icons')
   const history = useHistory();
 
   return (
