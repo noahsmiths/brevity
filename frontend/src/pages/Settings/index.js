@@ -1,5 +1,11 @@
+import SettingsNav from "../../components/SettingsNav"
+
 export default function Settings() {
     return (
-        <h1>Settings</h1>
+        <div>
+            <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+            <SettingsNav />
+        </div>
     )
+
 }
