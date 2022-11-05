@@ -14,7 +14,7 @@ export default function SettingsNav() {
 
                 <div className="flex-1">
                     <div className="tooltip tooltip-bottom" data-tip="Return">
-                        <div onClick={() => navigate("/")} className="btn btn-sm btn-primary mr-2">
+                        <div onClick={() => navigate("/")} className="btn btn-sm btn-ghost mr-2">
                             <FontAwesomeIcon icon={faArrowLeft} />
                         </div>
                     </div>
