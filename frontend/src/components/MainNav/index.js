@@ -1,5 +1,6 @@
 import { faGear } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import logo from '../../assets/Brevity.svg';
 
 import { useNavigate } from "react-router-dom";
 import Dropdown from "../Dropdown";
@@ -8,10 +9,9 @@ const NavBar = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="navbar bg-base-300 ">
-      <div className="flex-1 px-2 lg:flex-none">
-        <a href="/" className="text-lg font-bold">Brevity</a>
-        <img src="images/logo" alt="Brevity Icon" width="22" height="33" />{" "}
+    <div className="navbar bg-white p-0">
+      <div className="flex-1 lg:flex-none">
+        <img src={logo} alt="Brevity Icon" class="max-h-7" />{" "}
       </div>
       <div className="flex justify-end flex-1 px-2">
         <div className="flex items-stretch">
