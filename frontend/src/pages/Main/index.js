@@ -3,8 +3,10 @@ import NavBar from "../../components/MainNav";
 
 export default function Main() {
   return (
-    <div>
+    <div className="">
       <NavBar />
+      <EmailCard />
+      <EmailCard />
       <EmailCard />
     </div>
   );
