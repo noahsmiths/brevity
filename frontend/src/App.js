@@ -1,24 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+// Imports
+import { createMemoryHistory } from "history";
+import React from "react";
+import { Route, Router, Routes } from "react-router-dom";
+
+
+// Pages
+import Main from "./pages/Main";
+import Settings from "./pages/Settings";
+
+
+
+const history = createMemoryHistory();
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router history={history}>
+      <Routes>
+        <Route exact path="/">
+          <Main />
+        </Route>
+        <Route path="/settings">
+          <Settings />
+        </Route>
+      </Routes>
+    </Router>
   );
 }
 
