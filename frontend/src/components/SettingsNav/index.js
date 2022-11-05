@@ -10,7 +10,7 @@ export default function SettingsNav() {
     return (
 
         <main >
-            <div className="navbar bg-base-300">
+            <div className="navbar bg-white">
 
                 <div className="flex-1">
                     <div className="tooltip tooltip-bottom" data-tip="Return">

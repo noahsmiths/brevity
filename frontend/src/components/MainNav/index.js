@@ -8,7 +8,7 @@ const NavBar = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="navbar bg-base-100">
+    <div className="navbar bg-white">
       <div className="flex-1 lg:flex-none">
         <img src={logo} alt="Brevity Icon" class="max-h-7"/>{" "}
       </div>
