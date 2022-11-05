@@ -5,7 +5,7 @@ const NavBar = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="navbar bg-base-300 rounded-box ">
+    <div className="navbar bg-base-100 mb-4 border-2 border-black">
       <div className="flex-1 px-2 lg:flex-none">
         <a className="text-lg font-bold">Brevity</a>
         <img src="images/logo" alt="Brevity Icon" width="22" height="33" />{" "}

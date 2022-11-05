@@ -1,35 +1,35 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
-export default function LoginCard(props) {
-  const subject = props.subject;
-  const summary = props.summary;
-  const score = props.score;
-  const normMagnitude = props.normMangitude;
+export default function EmailCard(props) {
+  const { serviceName = "Email Service" } = props;
+  const { serviceDesc = "Abbreviate your service description." } = props;
+  const { isConnected = false } = props;
 
   var color;
-  if (score > 0) {
-    color = "#4BB543";
-  } else if (score === 0) {
-    color = "#B8B8B8";
-  } else {
+  if (isConnected == true) {
+    // Connected -> Red
     color = "#FF9494";
+  } else {
+    // Not Connected -> Blue
+    color = "#24A0ED";
   }
 
   return (
-    <div className="card w-96 bg-base-100 p-3 flex-row hover:underline hover:cursor-pointer">
-      <div className="w-11 pr-2">
-        <div
-          className="rounded-full h-9 w-9"
-          style={{ backgroundColor: color }}
-        >
-          &nbsp;
+      <div className="card w-full mt-1 bg-base-100 scale-95 shadow-md p-3 flex-row hover:cursor-pointer border-0.2 border-softgray">
+        <div class="w-11 pr-2 flex items-center justify-center">
+          <div class="rounded-full h-9 w-9" style={{ backgroundColor: color }}></div>
+        </div>
+        <div class="w-full">
+          <p class="text-lg text-black">{serviceName}</p>
+          <p class="text-sm text-gray-700">{serviceDesc}</p>
+          <div>
+          </div>
+        </div>
+        <div class="bg-flex flex items-center justify-center">
+          <button class="p-2 rounded-full" style={{backgroundColor: color}}>
+            {(isConnected) ? "Disconnect" : "Connect"}
+          </button>
         </div>
       </div>
-      <div className="bg-flex">
-        <p className="text-lg text-black">Example subject</p>
-        <p className="text-sm text-gray-700">Example summary</p>
-        <div></div>
-      </div>
-    </div>
   );
 }

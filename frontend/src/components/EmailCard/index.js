@@ -18,7 +18,7 @@ export default function EmailCard(props) {
 
   return (
     <a href={link} target="_blank">
-      <div className="card w-full mt-1 bg-base-100 scale-95 shadow-md p-3 flex-row hover:underline hover:cursor-pointer border-0.2 border-softgray">
+      <div className="card w-full mt-2 bg-base-100 scale-95 shadow-md p-3 flex-row hover:underline hover:cursor-pointer border-0.2 border-softgray">
         <div class="w-11 pr-2 flex items-center justify-center">
           <div class="rounded-full h-9 w-9" style={{ backgroundColor: color }}></div>
         </div>
