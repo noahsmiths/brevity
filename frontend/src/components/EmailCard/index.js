@@ -1,25 +1,32 @@
 import React, { useState, useEffect } from "react";
 
-<div className="card w-96 bg-base-100 shadow-xl">
-  <div className="card-body">
-    <div className="card-actions justify-end">
-      <button className="btn btn-square btn-sm">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="h-6 w-6"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            d="M6 18L18 6M6 6l12 12"
-          />
-        </svg>
-      </button>
+export default function EmailCard(props) {
+  const subject = props.subject;
+  const summary = props.summary;
+  const score = props.score;
+  const normMagnitude = props.normMangitude;
+
+  var color;
+  if (score > 0) {
+    color = "#4BB543";
+  } else if (score == 0) {
+    color = "#B8B8B8";
+  } else {
+    color = "#FF9494";
+  }
+
+  return (
+    <div className="card w-96 bg-base-100 bg-white p-3 flex-row hover:underline hover:cursor-pointer">
+      <div class="w-11 pr-2">
+        <div class="rounded-full h-9 w-9" style={{ backgroundColor: color}}>&nbsp;</div>
+      </div>
+      <div class="bg-flex">
+        <p class="text-lg text-black">{props.subject}</p>
+        <p class="text-sm text-gray-700">{props.summary}</p>
+        <div>
+        </div>
+      </div>
     </div>
-    <p>We are using cookies for no reason.</p>
-  </div>
-</div>;
+  );
+}
+
