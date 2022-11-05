@@ -16,12 +16,12 @@ export default function LoginCard(props) {
   }
 
   //psueodcode
-  let loginButton;
-  if (loggedIn) {
-    <button>Connected</button>;
-  } else {
-    <button>Sign Up</button>;
-  }
+  // let loginButton;
+  // if (loggedIn) {
+  //   <button>Connected</button>;
+  // } else {
+  //   <button>Sign Up</button>;
+  // }
 
   return (
     <div>
