@@ -5,9 +5,7 @@ export default function Main() {
   return (
     <div>
       <NavBar />
-      <EmailCard props={
-        props.subject: "test",
-        } />
+      <EmailCard />
     </div>
   );
 }
