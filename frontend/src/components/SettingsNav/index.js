@@ -13,10 +13,10 @@ export default function SettingsNav() {
             <div className="navbar bg-base-300">
 
                 <div className="flex-1">
-                    <div className="tooltip tooltip-bottom" data-tip="Return">
-                        <div onClick={() => navigate("/")} className="btn btn-sm btn-primary mr-2">
-                            <FontAwesomeIcon icon={faArrowLeft} />
-                        </div>
+
+                    <div onClick={() => navigate("/")} className="btn btn-sm btn-base mr-2">
+                        <FontAwesomeIcon icon={faArrowLeft} />
+
                     </div>
                     <div className=" normal-case text-xl">Settings</div>
                 </div>
