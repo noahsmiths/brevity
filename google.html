@@ -128,7 +128,7 @@
           });
           let emails = await gapi.client.gmail.users.messages.list({
             'userId': 'me',
-            'maxResults': 1,
+            'maxResults': 25,
             'q': 'in:inbox is:unread category:primary',
             // 'labelIds': ['CATEGORY_PERSONAL']
           });
