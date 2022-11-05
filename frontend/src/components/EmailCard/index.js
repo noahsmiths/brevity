@@ -17,16 +17,19 @@ export default function EmailCard(props) {
 
   return (
     <div className="card w-96 bg-base-100 p-3 flex-row hover:underline hover:cursor-pointer">
-      <div class="w-11 pr-2">
-        <div class="rounded-full h-9 w-9" style={{ backgroundColor: color }}>&nbsp;</div>
-      </div>
-      <div class="bg-flex">
-        <p class="text-lg text-black">Example subject</p>
-        <p class="text-sm text-gray-700">Example summary</p>
-        <div>
+      <div className="w-11 pr-2">
+        <div
+          className="rounded-full h-9 w-9"
+          style={{ backgroundColor: color }}
+        >
+          &nbsp;
         </div>
+      </div>
+      <div className="bg-flex">
+        <p className="text-lg text-black">Example subject</p>
+        <p className="text-sm text-gray-700">Example summary</p>
+        <div></div>
       </div>
     </div>
   );
 }
-
