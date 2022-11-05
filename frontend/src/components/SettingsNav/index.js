@@ -12,7 +12,7 @@ export default function SettingsNav() {
 
                 <div className="flex-1">
                     <div className="tooltip tooltip-bottom" data-tip="Return">
-                        <div onClick={() => navigate("/")} className="btn btn-ghost"><i class="fa-solid fa-arrow-left"></i></div>
+                        <div onClick={() => navigate("/")} className="btn btn-base-200"><i class="fa-solid fa-arrow-left"></i></div>
                     </div>
                     <div className="btn btn-ghost normal-case text-xl">Settings</div>
 
