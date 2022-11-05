@@ -5,7 +5,7 @@ export default function Settings() {
     return (
         <div>
             <SettingsNav />
-            {/* <EmailCard /> */}
+
         </div>
     )
 

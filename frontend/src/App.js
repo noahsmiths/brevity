@@ -6,13 +6,8 @@ import { Route, Routes } from "react-router-dom";
 import Main from "./pages/Main";
 import Settings from "./pages/Settings";
 
-
-
-
-
 function App() {
   return (
-
     <Routes>
       <Route path="/" element={
         <div>
