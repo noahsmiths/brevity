@@ -14,7 +14,7 @@ export default function SettingsNav() {
                     <div className="tooltip tooltip-bottom" data-tip="Return">
                         <div onClick={() => navigate("/")} className="btn btn-sm btn-base-200"><i class="fa-solid fa-arrow-left"></i></div>
                     </div>
-                    <div className="ml-2 normal-case text-xl">Settings</div>
+                    <div className=" normal-case text-xl">Settings</div>
 
 
                 </div>

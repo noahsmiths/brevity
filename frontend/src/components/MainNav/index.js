@@ -15,6 +15,7 @@ const NavBar = () => {
 
           <div className="">
             <Dropdown />
+
             <button className="btn btn-base-200 btn-sm max-w-sm" onClick={() => navigate("/settings")}>
               <i class="fa-solid fa-gear"></i>
             </button>
