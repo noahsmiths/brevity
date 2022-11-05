@@ -1,21 +1,24 @@
-import React, { useState, useEffect } from "react";
+import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
+import React from "react";
 
 const Dropdown = () => {
   return (
     <div className="dropdown dropdown-end">
       <label tabIndex={0} className="btn btn-ghost rounded-btn">
-        <i className="fa-sharp fa-solid fa-angle-down"></i>
-        Email Order
+        <FontAwesomeIcon icon={faAngleDown} className="mr-1" />
+        Sort By
       </label>
       <ul
         tabIndex={0}
         className="menu dropdown-content p-2 shadow bg-base-100 rounded-box w-52 mt-4"
       >
         <li>
-          <a>Item 1</a>
+          <div>Item 1</div>
         </li>
         <li>
-          <a>Item 2</a>
+          <div>Item 2</div>
         </li>
       </ul>
     </div>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 export default function LoginCard(props) {
   const subject = props.subject;
@@ -25,7 +25,7 @@ export default function LoginCard(props) {
 
   return (
     <div>
-      <div className="card w-96 bg-base-100 p-3 flex-row hover:underline hover:cursor-pointer">
+      <div className="card w-full mt-2 bg-base-300 scale-95 shadow-xl p-3 flex-row hover:underline hover:cursor-pointer hover:scale-100">
         <div className="w-11 pr-2">
           <div>
             <link
@@ -42,7 +42,7 @@ export default function LoginCard(props) {
         </div>
         <div>{/* loginButton */}</div>
       </div>
-      <div className="card w-96 bg-base-100 p-3 flex-row hover:underline hover:cursor-pointer">
+      <div className="card w-full mt-2 bg-base-300 scale-95 shadow-xl p-3 flex-row hover:underline hover:cursor-pointer hover:scale-100">
         <div className="w-11 pr-2">
           <div>
             <link
