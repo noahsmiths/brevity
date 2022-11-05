@@ -12,17 +12,16 @@ const NavBar = () => {
       </div>
       <div className="flex justify-end flex-1 px-2">
         <div className="flex items-stretch">
-
           <div className="">
             <Dropdown />
 
-            <button className="btn btn-base-200 btn-sm max-w-sm" onClick={() => navigate("/settings")}>
-              <i class="fa-solid fa-gear"></i>
+            <button
+              className="btn btn-base-200 btn-sm max-w-sm"
+              onClick={() => navigate("/settings")}
+            >
+              <i className="fa-solid fa-gear"></i>
             </button>
-
-
           </div>
-
         </div>
       </div>
     </div>

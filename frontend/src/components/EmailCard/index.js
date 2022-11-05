@@ -26,7 +26,11 @@ export default function EmailCard(props) {
         <div>
         </div>
       </div>
+      <div className="bg-flex">
+        <p className="text-lg text-black">Example subject</p>
+        <p className="text-sm text-gray-700">Example summary</p>
+        <div></div>
+      </div>
     </div>
   );
 }
-

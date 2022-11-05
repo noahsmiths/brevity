@@ -4,7 +4,7 @@ const Dropdown = () => {
   return (
     <div className="dropdown dropdown-end">
       <label tabIndex={0} className="btn btn-ghost rounded-btn">
-        <i class="fa-sharp fa-solid fa-angle-down"></i>
+        <i className="fa-sharp fa-solid fa-angle-down"></i>
         Email Order
       </label>
       <ul

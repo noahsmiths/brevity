@@ -1,12 +1,11 @@
-import EmailCard from "../../components/EmailCard"
-import SettingsNav from "../../components/SettingsNav"
+import LoginCard from "../../components/LoginCard";
+import SettingsNav from "../../components/SettingsNav";
 
 export default function Settings() {
-    return (
-        <div>
-            <SettingsNav />
-
-        </div>
-    )
-
+  return (
+    <div>
+      <SettingsNav />
+      <LoginCard />
+    </div>
+  );
 }
