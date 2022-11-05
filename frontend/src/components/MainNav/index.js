@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import Dropdown from "../Dropdown";
 
 const NavBar = () => {
   const navigate = useNavigate();
@@ -11,23 +12,7 @@ const NavBar = () => {
       </div>
       <div className="flex justify-end flex-1 px-2">
         <div className="flex items-stretch">
-          <div className="dropdown dropdown-end">
-            <label tabIndex={0} className="btn btn-ghost rounded-btn">
-              <i class="fa-sharp fa-solid fa-angle-down"></i>
-              Email Order
-            </label>
-            <ul
-              tabIndex={0}
-              className="menu dropdown-content p-2 shadow bg-base-100 rounded-box w-52 mt-4"
-            >
-              <li>
-                <a>Item 1</a>
-              </li>
-              <li>
-                <a>Item 2</a>
-              </li>
-            </ul>
-          </div>
+          <Dropdown />
           <a href="https://www.w3schools.com">
             <i class="fa-solid fa-gear"></i>
           </a>
