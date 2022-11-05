@@ -5,12 +5,18 @@ const NavBar = () => {
     <div className="navbar bg-base-300 rounded-box">
       <div className="flex-1 px-2 lg:flex-none">
         <a className="text-lg font-bold">Brevity</a>
+        <img
+          src="images/gearicon"
+          alt="Brevity Icon"
+          width="22"
+          height="33"
+        />{" "}
       </div>
       <div className="flex justify-end flex-1 px-2">
         <div className="flex items-stretch">
           <div className="dropdown dropdown-end">
             <label tabIndex={0} className="btn btn-ghost rounded-btn">
-              Dropdown
+              Email Order
             </label>
             <ul
               tabIndex={0}
