@@ -1,8 +1,6 @@
 // Imports
-import { createMemoryHistory } from "history";
 import React from "react";
-import { Route, Router, Routes } from "react-router-dom";
-
+import { Route, Routes } from "react-router-dom";
 
 // Pages
 import Main from "./pages/Main";
@@ -10,21 +8,24 @@ import Settings from "./pages/Settings";
 
 
 
-const history = createMemoryHistory();
 
 
 function App() {
   return (
-    <Router history={history}>
-      <Routes>
-        <Route exact path="/">
+
+    <Routes>
+      <Route path="/" element={
+        <div>
           <Main />
-        </Route>
-        <Route path="/settings">
+        </div>
+
+      } />
+      <Route path="/settings" element={
+        <div>
           <Settings />
-        </Route>
-      </Routes>
-    </Router>
+        </div>
+      } />
+    </Routes>
   );
 }
 
