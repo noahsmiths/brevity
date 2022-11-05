@@ -1,0 +1,25 @@
+{
+  "name": "brevity",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/noahsmiths/brevity.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/noahsmiths/brevity/issues"
+  },
+  "homepage": "https://github.com/noahsmiths/brevity#readme",
+  "dependencies": {
+    "@google-cloud/language": "^5.1.0",
+    "google-auth-library": "^8.6.0",
+    "html-to-text": "^8.2.1",
+    "request": "^2.88.2"
+  }
+}

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- <script src="./build.js"></script> -->
+        <script src="https://apis.google.com/js/api.js"></script>
+        <script>
+            function start() {
+            // 2. Initialize the JavaScript client library.
+            gapi.client.init({
+                'apiKey': 'AIzaSyCwgHoouSj6djXwYAsu7FKUra8140oqDNA',
+                // Your API key will be automatically added to the Discovery Document URLs.
+                'discoveryDocs': ['https://language.googleapis.com/$discovery/rest?version=v1']
+            }).then(function() {
+                // 3. Initialize and make the API request.
+                return gapi.client.language.documents.analyzeSentiment({
+                    'document': {
+                            'type': 'PLAIN_TEXT',
+                            'content': 'I am so happy'
+                        }});
+            }).then(function(response) {
+                console.log(response.result);
+            }, function(reason) {
+                console.log('Error: ' + reason.result.error.message);
+            });
+            };
+            // 1. Load the JavaScript client library.
+            gapi.load('client', start);
+        </script>
+    </head>
+    <body>
+
+    </body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script type="text/javascript" src="https://alcdn.msauth.net/browser/2.30.0/js/msal-browser.min.js"></script>
+    <script>
+        const msalConfig = {
+            auth: {
+                clientId: "1215945f-ad89-4331-92f6-0088940bc5c6"
+            }
+        }
+
+        const msalInstance = new msal.PublicClientApplication(msalConfig);
+        // msalInstance.loginPopup({
+        //     // redirectUri: "http://localhost:8000/outlook.html",
+        //     scopes: ['mail.read']
+        // });
+
+        msalInstance.acquireTokenPopup({
+            scopes: ['Mail.Read']
+        }).then(tokenResponse => {
+            // Do something with the tokenResponse
+            console.log(tokenResponse);
+            makeMailRequest(tokenResponse);
+        }).catch(error => {
+            console.log(error);
+        });
+
+        function makeMailRequest(tokenResponse) {
+            var headers = new Headers();
+            var bearer = "Bearer " + tokenResponse.accessToken;
+            headers.append("Authorization", bearer);
+            var options = {
+                    method: "GET",
+                    headers: headers
+            };
+            var graphEndpoint = "https://graph.microsoft.com/v1.0/me/messages";
+
+            fetch(graphEndpoint, options)
+                .then(resp => {
+                    console.log(resp);
+                });
+        }
+    </script>
+</head>
+<body>
+
+</body>
+</html>
