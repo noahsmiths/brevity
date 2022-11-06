@@ -10,7 +10,7 @@ module.exports = {
     },
     borderColor: {
       'softgray': '#D7D7D7',
-    }
+    },
   },
   plugins: [require("daisyui")],
   // daisyUI config (optional)
