@@ -11,14 +11,16 @@ export default function Main() {
 
   useEffect(() => {
     function getEmailData() {
-      chrome.storage.local.get(['emails'], (result) => {
-        if (result?.emails?.length > 0) {
-          // Do what you will with emails here
-          setEmailData(result);
-        } else {
-          setHasEmailData(false);
-        }
-      });
+      if (chrome?.storage?.local) {
+        chrome.storage.local.get(['emails'], (result) => {
+          if (result?.emails?.length > 0) {
+            // Do what you will with emails here
+            setEmailData(result);
+          } else {
+            setHasEmailData(false);
+          }
+        });
+      }
     }
 
     getEmailData();
@@ -44,7 +46,7 @@ export default function Main() {
 
       {!hasEmailData ?
         <div>
-          <h1>You don't have any recent emails right now...ß</h1>
+          <h1>You don't have any recent emails right now...</h1>
         </div>
         :
         null
