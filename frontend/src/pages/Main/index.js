@@ -41,13 +41,8 @@ export default function Main() {
   }
 
   useEffect(() => {
-
-    setInterval(getEmailData, 45000, () => {
-      console.log("Fetching newest emails")
-    })
-
     getEmailData();
-  }, [])
+  }, []);
 
   useEffect(() => {
     if (sortMethod === 'urgency') {
@@ -72,7 +67,7 @@ export default function Main() {
   return (
     <div className="p-3 pr-5">
       <NavBar />
-      <Dropdown setSort={setSort} sortMethod={sortMethod} />
+      <Dropdown setSort={setSort} sortMethod={sortMethod}/>
       {emailData ? emailData.map((email, index) => {
         console.log(`key: ${index} \n pair: ${email}`);
         console.log(email);
