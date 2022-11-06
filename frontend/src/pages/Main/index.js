@@ -62,7 +62,7 @@ export default function Main() {
 
       setEmailData(newEmailData);
     }
-  }, [sortMethod]);
+  }, [sortMethod, emailData]);
 
   return (
     <div className="p-3 pr-5">
