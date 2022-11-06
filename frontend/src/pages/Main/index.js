@@ -9,40 +9,6 @@ export default function Main() {
 
   const [emailData, setEmailData] = useState([]);
   const [hasEmailData, setHasEmailData] = useState(false);
-  const [sortMethod, setSortMethod] = useState('urgency');
-  const [isLoggedIn, setIsLoggedIn] = useState('false');
-
-  const getEmailData = () => {
-    if (chrome?.storage?.local) {
-      chrome.storage.local.get(['emails', 'gmail_token'], (result) => {
-        if (result?.gmail_token) {
-          setIsLoggedIn(true);
-        }
-        if (result?.emails?.length > 0) {
-          // Do what you will with emails here
-          /*
-          // Code to sort by urgency
-          let emails = result.emails;
-          console.log(emails[0].urgency);
-          emails.sort((a, b) => {
-            return b.urgency - a.urgency;
-          });
-          setEmailData(emails);
-          */
-          setEmailData(result.emails);
-          setHasEmailData(true)
-          console.log(result);
-        } else {
-          setHasEmailData(false);
-          console.warn("Data couldn't be loadedß")
-        }
-      });
-    }
-  }
-
-  const setSort = (sort) => {
-    setSortMethod(sort);
-  }
 
   useEffect(() => {
     function getEmailData() {
