@@ -2,6 +2,7 @@ import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useNavigate } from 'react-router-dom';
 import logo from '../../assets/Brevity.svg';
+import ThemeToggle from '../ThemeToggle';
 
 
 export default function SettingsNav() {
@@ -21,6 +22,7 @@ export default function SettingsNav() {
                     <img src={logo} alt="Brevity Icon" className="max-h-7" />{" "}
                 </div>
                 <div className="flex-1">
+
                 </div>
             </div>
         </main >
