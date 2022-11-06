@@ -28,6 +28,8 @@ chrome.runtime.onMessage.addListener((data) => {
         let token = data?.message?.token;
         chrome.storage.local.set({
             gmail_token: token
+        }, () => {
+            getEmails();
         });
     }
 });
