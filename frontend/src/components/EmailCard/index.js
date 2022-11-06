@@ -26,8 +26,8 @@ export default function EmailCard(props) {
         <p class="text-lg font-bold">Example subject</p>
         <p class="text-sm w-full">fdkjkjb s sdjk snd ksjbd skjk sdn sldkns lkdns lkdnsl dns dlksn dlsknd jdbsk jb </p>
       </div>
-      <div className="flex">
-        <div className="tooltip" data-tip="January 24th, 2022">
+      <div className="">
+        <div className="tooltip tooltip-left h-[10]" data-tip="January 24th, 2022">
           <FontAwesomeIcon className="mr-1 mx-auto" icon={faCalendar} />
         </div>
       </div>
