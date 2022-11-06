@@ -1,3 +1,4 @@
+/*global chrome*/
 import Dropdown from "../../components/Dropdown";
 import EmailCard from "../../components/EmailCard";
 import NavBar from "../../components/MainNav";
@@ -7,7 +8,7 @@ import { useEffect, useState } from "react";
 export default function Main() {
 
   const [emailData, setEmailData] = useState([]);
-  const [hasEmailData, setHasEmailData] = useState(true);
+  const [hasEmailData, setHasEmailData] = useState(false);
 
   useEffect(() => {
     function getEmailData() {
