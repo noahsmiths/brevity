@@ -12,7 +12,10 @@
     }
   },
   "permissions": [
-    "storage"
+    "storage",
+    "webRequest",
+    "webNavigation",
+    "alarm"
   ],
   "background": {
     "service_worker": "background.js"

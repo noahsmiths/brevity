@@ -1,3 +1,12 @@
+chrome.webNavigation.onHistoryStateUpdated.addListener((details) => {
+    console.log('wake me up');
+});
+
+chrome.alarms.create({ periodInMinutes: 4.9 });
+chrome.alarms.onAlarm.addListener(() => {
+  console.log('log for debug');
+});
+
 // const { convert } = require('html-to-text');
 
 var decode = function (input) {
@@ -183,7 +192,7 @@ const getEmails = async () => {
     chrome.storage.local.get(['gmail_token', 'emails'], (result) => {
         if (result?.gmail_token != undefined) {
             // Get most recent emails
-            fetch(`https://gmail.googleapis.com/gmail/v1/users/me/messages?maxResults=20&q=${encodeURI('in:inbox is:unread category:primary')}`, {
+            fetch(`https://gmail.googleapis.com/gmail/v1/users/me/messages?maxResults=15&q=${encodeURI('in:inbox is:unread category:primary')}`, {
                 headers: {
                     'Authorization': 'Bearer ' + result.gmail_token
                 }
