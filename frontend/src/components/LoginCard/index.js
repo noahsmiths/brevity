@@ -58,7 +58,7 @@ export default function EmailCard(props) {
         </div>
       </div>
       <div className="flex items-center">
-        <div className="p-2 btn btn-info text-gray-100" onClick={() => { toggle() }}>
+        <div className={isConnected ? "p-2 btn btn-error text-gray-100" : "p-2 btn btn-info text-gray-100"} onClick={() => { toggle() }}>
           {(isConnected) ? "Disconnect" : "Connect"}
         </div>
       </div>
