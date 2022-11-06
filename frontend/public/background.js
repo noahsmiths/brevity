@@ -115,7 +115,8 @@ const analyzeUrgency = (text) => {
                 Email:
                 ${text}
 
-                Score:`
+                Score:
+                `
             })
         })
             .then(res => res.json())
