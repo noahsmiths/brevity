@@ -1,8 +1,8 @@
 /*global chrome*/
+import { useEffect, useState } from "react";
 import Dropdown from "../../components/Dropdown";
 import EmailCard from "../../components/EmailCard";
 import NavBar from "../../components/MainNav";
-import { useEffect, useState } from "react";
 
 
 export default function Main() {
@@ -16,9 +16,12 @@ export default function Main() {
         chrome.storage.local.get(['emails'], (result) => {
           if (result?.emails?.length > 0) {
             // Do what you will with emails here
-            setEmailData(result);
+            setEmailData(result.emails);
+            setHasEmailData(true)
+            console.log(result);
           } else {
             setHasEmailData(false);
+            console.warn("Data couldn't be loadedß")
           }
         });
       }
@@ -37,10 +40,9 @@ export default function Main() {
       <Dropdown />
       {emailData ? emailData.map((email, index) => {
         console.log(`key: ${index} \n pair: ${email}`);
-        let sentimentValue =
-          <div>
-            <EmailCard props={email} />
-          </div>
+        <div>
+          <EmailCard props={email} />
+        </div>
       })
         : <h1>Loading Emails...</h1>
       }
