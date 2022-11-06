@@ -125,7 +125,7 @@ const analyzeUrgency = (text) => {
                     console.log(`Text: "${text}" with urgency: ${+res.choices[0].text.trim().match(/\d+/g)[0]}`);
                     resolve(+res.choices[0].text.trim().match(/\d+/g)[0]);
                 } else {
-                    reject("not parsable");
+                    resolve(1);
                 }
             })
             .catch(reject);
@@ -163,6 +163,8 @@ const analyzeSummary = (text) => {
                 if (res?.choices?.length > 0) {
                     console.log(`Text: "${text}" with summary: ${res.choices[0].text.trim()}`);
                     resolve(res.choices[0].text.trim());
+                } else {
+                    resolve(text);
                 }
             })
             .catch(reject);
