@@ -9,6 +9,23 @@ export default function Main() {
 
   const [emailData, setEmailData] = useState([]);
   const [hasEmailData, setHasEmailData] = useState(false);
+  const [sortMethod, setSortMethod] = useState('urgency');
+
+  const sortEmails = () => {
+    let newEmails = [...emailData];
+
+    if (sortMethod === 'urgency') {
+      newEmails.sort((a, b) => {
+        return b.urgency - a.urgency;
+      });
+    } else if (sortMethod === 'recency') {
+      newEmails.sort((a, b) => {
+        return b.timestamp - a.timestamp;
+      });
+    }
+
+    setEmailData(newEmails);
+  }
 
   useEffect(() => {
     function getEmailData() {
@@ -17,16 +34,15 @@ export default function Main() {
           console.log(result);
           if (result?.emails?.length > 0) {
             // Do what you will with emails here
-            /*
+            
             // Code to sort by urgency
             let emails = result.emails;
-            console.log(emails[0].urgency);
             emails.sort((a, b) => {
               return b.urgency - a.urgency;
             });
             setEmailData(emails);
-            */
-            setEmailData(result.emails);
+            
+            //setEmailData(result.emails);
             setHasEmailData(true)
             console.log(result);
           } else {
@@ -40,13 +56,14 @@ export default function Main() {
     getEmailData();
   }, [])
 
-
-
+  useEffect(() => {
+    sortEmails();
+  }, [sortMethod]);
 
   return (
     <div className="p-3 pr-5">
       <NavBar />
-      <Dropdown />
+      <Dropdown sortMethod={sortMethod} setSortMethod={setSortMethod}/>
       {emailData ? emailData.map((email, index) => {
         console.log(`key: ${index} \n pair: ${email}`);
         console.log(email);
