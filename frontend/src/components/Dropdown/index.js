@@ -16,10 +16,10 @@ const Dropdown = (props) => {
           className="menu dropdown-content p-2 shadow bg-base-100 rounded-box w-52 mt-4"
         >
           <li>
-            <div onClick={() => {props.setSortMethod('recency'); document.activeElement.blur();}}>Recency</div>
+            <div onClick={() => { props.setSortMethod('recency'); document.activeElement.blur(); }}>Recency</div>
           </li>
           <li>
-            <div onClick={() => {props.setSortMethod('urgency'); document.activeElement.blur();}}>Urgency</div>
+            <div onClick={() => { props.setSortMethod('urgency'); document.activeElement.blur(); }}>Urgency</div>
           </li>
         </ul>
       </div>
