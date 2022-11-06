@@ -126,7 +126,7 @@ const getEmails = async () => {
                     let parsedEmails = [];
 
                     for (let email of res) {
-                        if (email?.payload?.parts !== undefined && email?.payload?.parts?.length > 0) {
+                        if (email?.payload?.parts?.length > 0 && email?.payload?.parts[0]?.body?.data !== undefined) {
                             let urgencies = [1, 2, 3, 4, 5];
                             let parsedEmail = {
                                 timestamp: email.internalDate,
