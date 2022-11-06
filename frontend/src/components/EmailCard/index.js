@@ -2,54 +2,40 @@ import { faCalendar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from "react";
 
-export default function EmailCard(props) {
-  const subject = props.subject;
-  const summary = props.summary;
-  const urgency = props.urgency
-  const timestamp = props.timestamp;
-  const sender = props.sender;
-  const url = props.url;
+export default function EmailCard({ props }) {
 
-  const [color, setColor] = useState("");
+  console.log(props)
 
   const calculateUrgency = (urgency) => {
     switch (urgency) {
       case 1:
-        setColor("bg-neutral-50");
-        break;
+        return ("bg-base-300");
       case 2:
-        setColor("bg-yellow-500");
-        break;
+        return ("bg-yellow-500");
       case 3:
-        setColor("bg-amber-500");
-        break;
+        return ("bg-amber-500");
       case 4:
-        setColor("bg-orange-500");
-        break;
+        return ("bg-orange-500");
       case 5:
-        setColor("bg-red-500");
-        break;
+        return ("bg-red-500");
       default:
-        setColor("bg-neutral-50");
-        break;
+        return ("bg-base-300");
     }
 
   }
 
-
-
   return (
-    <a href={url}>
+    <a href={props.url}>
       <div className="card w-full mt-1 bg-base-ß100 border-0.2 border-softgray shadow-xl p-3 flex flex-row scale-[.975] hover:scale-100 hover:underline hover:cursor-pointer">
         <div class="w-11 pr-2">
-          <div class={`rounded-full mt-6 h-6 w-6 ml-1 ${calculateUrgency(urgency)}`}></div>
+          <div class={`rounded-full mt-6 h-6 w-6 ml-1 ${calculateUrgency(props.urgency)}`}></div>
         </div>
         <div class="flex flex-col">
-          <p class="text-lg font-bold">{subject}</p>
-          <p class="text-sm w-full text-gray-500">{summary}</p>
+          <p class="text-lg font-bold">{props.subject}</p>
+          <p class="text-sm w-full text-gray-500">{props.summary}</p>
         </div>
         <div className="">
-          <div className="tooltip tooltip-left h-[10]" data-tip={timestamp}>
+          <div className="tooltip tooltip-left h-[10]" data-tip={props.timestamp}>
             <FontAwesomeIcon className="mr-1 mx-auto" icon={faCalendar} />
           </div>
         </div>

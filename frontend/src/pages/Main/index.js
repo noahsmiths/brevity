@@ -40,9 +40,12 @@ export default function Main() {
       <Dropdown />
       {emailData ? emailData.map((email, index) => {
         console.log(`key: ${index} \n pair: ${email}`);
-        <div>
-          <EmailCard props={email} />
-        </div>
+        console.log(email);
+        return (
+          <div>
+            <EmailCard props={email} />
+          </div>
+        )
       })
         : <h1>Loading Emails...</h1>
       }
