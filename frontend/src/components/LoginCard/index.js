@@ -6,10 +6,9 @@ import React, { useEffect, useState } from "react";
 import gmailLogo from "../../assets/Gmail.svg";
 
 export default function EmailCard(props) {
-  const { serviceName = "GMail" } = props;
-  const { serviceDesc = "Abbreviate your Gmail inbox." } = props;
+  const { serviceName = "Gmail" } = props;
+  const { serviceDesc = "Connect your Gmail inbox." } = props;
   const [isConnected, setIsConnected] = useState(false);
-  const [tokenClient, setTokenClient] = useState(false);
 
   useEffect(() => {
     console.log("running!");
@@ -51,9 +50,9 @@ export default function EmailCard(props) {
       <div className="flex items-center">
         <div
           className={
-            isConnected
-              ? "p-2 btn btn-error text-gray-100 hover:btn-focused"
-              : "p-2 btn btn-info text-gray-100 hover:btn-focus"
+            !isConnected
+              ? "p-2 btn bg-sky-400 hover:bg-sky-500 border-none text-gray-100"
+              : "p-2 btn bg-red-400 hover:bg-red-500 border-none text-gray-100"
           }
           onClick={() => {
             toggle();
