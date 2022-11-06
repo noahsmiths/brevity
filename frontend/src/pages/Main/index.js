@@ -1,5 +1,5 @@
 /*global chrome*/
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import Dropdown from "../../components/Dropdown";
 import EmailCard from "../../components/EmailCard";
@@ -9,19 +9,19 @@ export default function Main() {
 
   const [emailData, setEmailData] = useState([]);
   const [hasEmailData, setHasEmailData] = useState(false);
-  const [sortMethod, setSortMethod] = useState('urgency');
   const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const sortMethod = useRef('urgency');
 
   const navigate = useNavigate();
 
-  const sortEmails = () => {
-    let newEmails = [...emailData];
+  const sortEmails = (emails) => {
+    let newEmails = emails || [...emailData];
 
-    if (sortMethod === 'urgency') {
+    if (sortMethod.current === 'urgency') {
       newEmails.sort((a, b) => {
         return b.urgency - a.urgency;
       });
-    } else if (sortMethod === 'recency') {
+    } else if (sortMethod.current === 'recency') {
       newEmails.sort((a, b) => {
         return b.timestamp - a.timestamp;
       });
@@ -44,10 +44,11 @@ export default function Main() {
 
             // Code to sort by urgency
             let emails = result.emails;
-            emails.sort((a, b) => {
-              return b.urgency - a.urgency;
-            });
-            setEmailData(emails);
+            sortEmails(emails);
+            // emails.sort((a, b) => {
+            //   return b.urgency - a.urgency;
+            // });
+            // setEmailData(emails);
 
             //setEmailData(result.emails);
             setHasEmailData(true)
@@ -63,9 +64,9 @@ export default function Main() {
     getEmailData();
   }, [])
 
-  useEffect(() => {
-    sortEmails();
-  }, [sortMethod]);
+  // useEffect(() => {
+  //   sortEmails();
+  // }, [sortMethod]);
 
   return (
     <div className="p-3 pr-5">
@@ -73,7 +74,7 @@ export default function Main() {
 
       {isLoggedIn &&
         <div>
-          <Dropdown sortMethod={sortMethod} setSortMethod={setSortMethod} />
+          <Dropdown sortMethod={sortMethod} sort={sortEmails} />
 
         </div>
       }
