@@ -24,7 +24,7 @@ export default function EmailCard(props) {
       </div>
       <div class="flex flex-col">
         <p class="text-lg font-bold">Example subject</p>
-        <p class="text-sm w-full text-softgray">fdkjkjb s sdjk snd ksjbd skjk sdn sldkns lkdns lkdnsl dns dlksn dlsknd jdbsk jb </p>
+        <p class="text-sm w-full text-gray-300">fdkjkjb s sdjk snd ksjbd skjk sdn sldkns lkdns lkdnsl dns dlksn dlsknd jdbsk jb </p>
       </div>
       <div className="">
         <div className="tooltip tooltip-left h-[10]" data-tip="January 24th, 2022">
