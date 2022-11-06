@@ -1,7 +1,6 @@
 import { faCalendar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import format from "date-fns/format";
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 export default function EmailCard({ props }) {
   console.log(props);

@@ -1,6 +1,6 @@
 // const { convert } = require('html-to-text');
 
-var decode = function(input) {
+var decode = function (input) {
     // Replace non-url compatible chars with base64 standard chars
     input = input
         .replace(/-/g, '+')
@@ -8,11 +8,11 @@ var decode = function(input) {
 
     // Pad out with standard base64 required padding characters
     var pad = input.length % 4;
-    if(pad) {
-      if(pad === 1) {
-        throw new Error('InvalidLengthError: Input base64url string is the wrong length to determine padding');
-      }
-      input += new Array(5-pad).join('=');
+    if (pad) {
+        if (pad === 1) {
+            throw new Error('InvalidLengthError: Input base64url string is the wrong length to determine padding');
+        }
+        input += new Array(5 - pad).join('=');
     }
 
     return input;
@@ -49,12 +49,12 @@ const analyzeEmailSentiment = (text, type) => {
                 }
             })
         })
-        .then(res => res.json())
-        .then(res => {
-            resolve(res);
-        }).catch(err => {
-            reject(err);
-        })
+            .then(res => res.json())
+            .then(res => {
+                resolve(res);
+            }).catch(err => {
+                reject(err);
+            })
         // let analysis = gapi.client.language.documents.analyzeSentiment({
         //     'document': {
         //         'type': type,
@@ -80,7 +80,9 @@ const analyzeEmailSentiment = (text, type) => {
 
 const analyzeUrgency = (text) => {
     return new Promise((resolve, reject) => {
-        const openAIKey = atob("c2stbmdEdGFRWWR1RHN1bWVSWmVsMUpUM0JsYmtGSkxEWFJrcWtobEhOTm1ndVBOWFFt");
+        const firstHalf = "sk-mGqEty8d7u47uwTvq0f";
+        const secondHalf = "5T3BlbkFJMVcfZXfY4xf1mp4Lcycb";
+        const openAIKey = firstHalf + secondHalf;
 
         fetch(`https://api.openai.com/v1/completions`, {
             method: 'POST',
@@ -104,18 +106,20 @@ const analyzeUrgency = (text) => {
                 Email:
                 ${text}
 
-                Score:
-                `
+                Score:`
             })
         })
-        .then(res => res.json())
-        .then(res => {
-            if (res?.choices?.length > 0 && Number.isInteger(+res.choices[0].text.trim().match(/\d+/g)[0])) {
-                console.log(`Text: "${text}" with urgency: ${+res.choices[0].text.trim().match(/\d+/g)[0]}`);
-                resolve(+res.choices[0].text.trim().match(/\d+/g)[0]);
-            }
-        })
-        .catch(reject);
+            .then(res => res.json())
+            .then(res => {
+                console.log(res);
+                if (res?.choices?.length > 0 && res.choices[0] !== undefined && Number.isInteger(+res.choices[0].text.trim().match(/\d+/g)[0])) {
+                    console.log(`Text: "${text}" with urgency: ${+res.choices[0].text.trim().match(/\d+/g)[0]}`);
+                    resolve(+res.choices[0].text.trim().match(/\d+/g)[0]);
+                } else {
+                    reject("not parsable");
+                }
+            })
+            .catch(reject);
     });
 }
 
@@ -143,14 +147,14 @@ const analyzeSummary = (text) => {
                 `
             })
         })
-        .then(res => res.json())
-        .then(res => {
-            if (res?.choices?.length > 0) {
-                console.log(`Text: "${text}" with summary: ${res.choices[0].text.trim()}`);
-                resolve(res.choices[0].text.trim());
-            }
-        })
-        .catch(reject);
+            .then(res => res.json())
+            .then(res => {
+                if (res?.choices?.length > 0) {
+                    console.log(`Text: "${text}" with summary: ${res.choices[0].text.trim()}`);
+                    resolve(res.choices[0].text.trim());
+                }
+            })
+            .catch(reject);
     });
 }
 
@@ -179,121 +183,121 @@ const getEmails = async () => {
     chrome.storage.local.get(['gmail_token', 'emails'], (result) => {
         if (result?.gmail_token != undefined) {
             // Get most recent emails
-            fetch(`https://gmail.googleapis.com/gmail/v1/users/me/messages?maxResults=25&q=${encodeURI('in:inbox is:unread category:primary')}`, {
+            fetch(`https://gmail.googleapis.com/gmail/v1/users/me/messages?maxResults=20&q=${encodeURI('in:inbox is:unread category:primary')}`, {
                 headers: {
                     'Authorization': 'Bearer ' + result.gmail_token
                 }
             })
-            .then(res => res.json())
-            .then(res => {
-                let promises = [];
-
-                for (let message of res.messages) {
-                    promises.push(
-                        fetch(`https://gmail.googleapis.com/gmail/v1/users/me/messages/${message.id}`, {
-                            headers: {
-                                'Authorization': 'Bearer ' + result.gmail_token
-                            }
-                        })
-                        .then(res => res.json())
-                    );
-                    // fetch(`https://gmail.googleapis.com/gmail/v1/users/me/messages/${message.id}`, {
-                    //     headers: {
-                    //         'Authorization': 'Bearer ' + result.gmail_token
-                    //     }
-                    // })
-                    // .then(res => res.json())
-                    // .then(async res => {
-                    //     if (res?.payload?.parts?.length > 1) {
-                    //         let text = convert(atob(decode(res.payload.parts[1].body.data)));
-                    //         text = text.replace(/\[.*\]/g, "").replace(/https?:\/\/.*?[\s+]/g, "").replace(/\n/g, " ");
-                    //         console.log(text);
-
-                    //         // let sentiment = await analyzeEmailSentiment(text, 'PLAIN_TEXT');
-                    //         // ranks.push({
-                    //         //     overall: sentiment.documentSentiment.magnitude * sentiment.documentSentiment.score,
-                    //         //     text
-                    //         // });
-                    //     }
-                    // })
-                    // .catch(err => console.error(err));
-                }
-
-                Promise.all(promises)
+                .then(res => res.json())
                 .then(res => {
-                    console.log(res);
-                    let parsedEmails = [];
-                    let analysisPromises = [];
+                    let promises = [];
 
-                    let alreadyExistingEmails = {};
+                    for (let message of res.messages) {
+                        promises.push(
+                            fetch(`https://gmail.googleapis.com/gmail/v1/users/me/messages/${message.id}`, {
+                                headers: {
+                                    'Authorization': 'Bearer ' + result.gmail_token
+                                }
+                            })
+                                .then(res => res.json())
+                        );
+                        // fetch(`https://gmail.googleapis.com/gmail/v1/users/me/messages/${message.id}`, {
+                        //     headers: {
+                        //         'Authorization': 'Bearer ' + result.gmail_token
+                        //     }
+                        // })
+                        // .then(res => res.json())
+                        // .then(async res => {
+                        //     if (res?.payload?.parts?.length > 1) {
+                        //         let text = convert(atob(decode(res.payload.parts[1].body.data)));
+                        //         text = text.replace(/\[.*\]/g, "").replace(/https?:\/\/.*?[\s+]/g, "").replace(/\n/g, " ");
+                        //         console.log(text);
 
-                    if (result?.emails?.length) {
-                        for (let oldEmail of result.emails) {
-                            alreadyExistingEmails[oldEmail.id] = oldEmail;
-                        }
+                        //         // let sentiment = await analyzeEmailSentiment(text, 'PLAIN_TEXT');
+                        //         // ranks.push({
+                        //         //     overall: sentiment.documentSentiment.magnitude * sentiment.documentSentiment.score,
+                        //         //     text
+                        //         // });
+                        //     }
+                        // })
+                        // .catch(err => console.error(err));
                     }
 
-                    console.log(alreadyExistingEmails);
+                    Promise.all(promises)
+                        .then(res => {
+                            console.log(res);
+                            let parsedEmails = [];
+                            let analysisPromises = [];
 
-                    for (let email of res) {
-                        if (alreadyExistingEmails[email.id]) {
-                            parsedEmails.push(alreadyExistingEmails[email.id]);
-                        } else if (email?.payload?.parts?.length > 0 && email?.payload?.parts[0]?.body?.data !== undefined) {
-                            let text = atob(decode(email.payload.parts[0].body.data)).replace(/\[.*\]/g, "").replace(/https?:\/\/.*?[\s+]/g, "");
-                            analysisPromises.push(analyzeEmails(email, text));
-                            // let urgencies = [1, 2, 3, 4, 5];
-                            // analyzeUrgency(text);
+                            let alreadyExistingEmails = {};
 
-                            // let parsedEmail = {
-                            //     timestamp: email.internalDate,
-                            //     subject: email.payload.headers.find(x => x.name.toLowerCase().trim() == 'subject').value,
-                            //     summary: "Coming soon!",
-                            //     urgency: await analyzeUrgency(text),
-                            //     url: `https://mail.google.com/mail/#inbox/${email.id}`,
-                            //     sender: email.payload.headers.find(x => x.name.toLowerCase().trim() == 'from').value,
-                            //     content: text,
-                            // };
+                            if (result?.emails?.length) {
+                                for (let oldEmail of result.emails) {
+                                    alreadyExistingEmails[oldEmail.id] = oldEmail;
+                                }
+                            }
 
-                            // parsedEmails.push(parsedEmail);
-                        }
-                    }
+                            console.log(alreadyExistingEmails);
 
-                    Promise.all(analysisPromises)
-                    .then(res => {
-                        for (let data of res) {
-                            let email = data[0];
-                            let text = data[1];
-                            let urgency = data[2];
-                            let summary = data[3];
+                            for (let email of res) {
+                                if (alreadyExistingEmails[email.id]) {
+                                    parsedEmails.push(alreadyExistingEmails[email.id]);
+                                } else if (email?.payload?.parts?.length > 0 && email?.payload?.parts[0]?.body?.data !== undefined) {
+                                    let text = atob(decode(email.payload.parts[0].body.data)).replace(/\[.*\]/g, "").replace(/https?:\/\/.*?[\s+]/g, "");
+                                    analysisPromises.push(analyzeEmails(email, text));
+                                    // let urgencies = [1, 2, 3, 4, 5];
+                                    // analyzeUrgency(text);
 
-                            let parsedEmail = {
-                                timestamp: email.internalDate,
-                                subject: email.payload.headers.find(x => x.name.toLowerCase().trim() == 'subject').value,
-                                summary: summary,
-                                urgency: urgency,
-                                url: `https://mail.google.com/mail/#inbox/${email.id}`,
-                                sender: email.payload.headers.find(x => x.name.toLowerCase().trim() == 'from').value,
-                                content: text,
-                                id: email.id
-                            };
+                                    // let parsedEmail = {
+                                    //     timestamp: email.internalDate,
+                                    //     subject: email.payload.headers.find(x => x.name.toLowerCase().trim() == 'subject').value,
+                                    //     summary: "Coming soon!",
+                                    //     urgency: await analyzeUrgency(text),
+                                    //     url: `https://mail.google.com/mail/#inbox/${email.id}`,
+                                    //     sender: email.payload.headers.find(x => x.name.toLowerCase().trim() == 'from').value,
+                                    //     content: text,
+                                    // };
 
-                            parsedEmails.push(parsedEmail);
-                        }
+                                    // parsedEmails.push(parsedEmail);
+                                }
+                            }
 
-                        chrome.storage.local.set({
-                            emails: parsedEmails
+                            Promise.all(analysisPromises)
+                                .then(res => {
+                                    for (let data of res) {
+                                        let email = data[0];
+                                        let text = data[1];
+                                        let urgency = data[2];
+                                        let summary = data[3];
+
+                                        let parsedEmail = {
+                                            timestamp: email.internalDate,
+                                            subject: email.payload.headers.find(x => x.name.toLowerCase().trim() == 'subject').value,
+                                            summary: summary,
+                                            urgency: urgency,
+                                            url: `https://mail.google.com/mail/#inbox/${email.id}`,
+                                            sender: email.payload.headers.find(x => x.name.toLowerCase().trim() == 'from').value,
+                                            content: text,
+                                            id: email.id
+                                        };
+
+                                        parsedEmails.push(parsedEmail);
+                                    }
+
+                                    chrome.storage.local.set({
+                                        emails: parsedEmails
+                                    });
+                                })
+                                .catch(err => console.error(err));
+                        })
+                        .catch(err => {
+                            console.error(err);
                         });
-                    })
-                    .catch(err => console.error(err));
                 })
-                .catch(err => {
-                    console.error(err);
-                });
-            })
-            .catch(err => console.error(err));
+                .catch(err => console.error(err));
         }
     });
 }
 
 getEmails();
-setInterval(getEmails, 30000);
+setInterval(getEmails, 40000);
