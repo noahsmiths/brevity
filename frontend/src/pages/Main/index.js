@@ -16,6 +16,15 @@ export default function Main() {
         chrome.storage.local.get(['emails'], (result) => {
           if (result?.emails?.length > 0) {
             // Do what you will with emails here
+            /*
+            // Code to sort by urgency
+            let emails = result.emails;
+            console.log(emails[0].urgency);
+            emails.sort((a, b) => {
+              return b.urgency - a.urgency;
+            });
+            setEmailData(emails);
+            */
             setEmailData(result.emails);
             setHasEmailData(true)
             console.log(result);

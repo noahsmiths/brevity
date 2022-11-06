@@ -78,8 +78,105 @@ const analyzeEmailSentiment = (text, type) => {
     });
 }
 
+const analyzeUrgency = (text) => {
+    return new Promise((resolve, reject) => {
+        const openAIKey = atob("c2stbmdEdGFRWWR1RHN1bWVSWmVsMUpUM0JsYmtGSkxEWFJrcWtobEhOTm1ndVBOWFFt");
+
+        fetch(`https://api.openai.com/v1/completions`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${openAIKey}`
+            },
+            body: JSON.stringify({
+                "model": 'text-davinci-002',
+                "temperature": 0,
+                "max_tokens": 256,
+                "prompt": `
+                Score the email according to this criteria:
+
+                The sentiment is very urgent - 5
+                The sentiment is urgent - 4
+                The sentiment is somewhat urgent - 3
+                The sentiment is not very urgent - 2
+                The sentiment is neutral - 1
+
+                Email:
+                ${text}
+
+                Score:
+                `
+            })
+        })
+        .then(res => res.json())
+        .then(res => {
+            if (res?.choices?.length > 0 && Number.isInteger(+res.choices[0].text.trim().match(/\d+/g)[0])) {
+                console.log(`Text: "${text}" with urgency: ${+res.choices[0].text.trim().match(/\d+/g)[0]}`);
+                resolve(+res.choices[0].text.trim().match(/\d+/g)[0]);
+            }
+        })
+        .catch(reject);
+    });
+}
+
+const analyzeSummary = (text) => {
+    return new Promise((resolve, reject) => {
+        const openAIKey = "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";
+
+        fetch(`https://api.openai.com/v1/completions`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${openAIKey}`
+            },
+            body: JSON.stringify({
+                "model": 'text-davinci-002',
+                "temperature": 0,
+                "max_tokens": 256,
+                "prompt": `
+                Write a short summary of the following email:
+
+                Email:
+                ${text}
+
+                Summary:
+                `
+            })
+        })
+        .then(res => res.json())
+        .then(res => {
+            if (res?.choices?.length > 0) {
+                console.log(`Text: "${text}" with summary: ${res.choices[0].text.trim()}`);
+                resolve(res.choices[0].text.trim());
+            }
+        })
+        .catch(reject);
+    });
+}
+
+const analyzeEmails = (email, text) => {
+    return new Promise(async (resolve, reject) => {
+        let urgency = analyzeUrgency(text);
+        let summary = analyzeSummary(text);
+
+        try {
+            urgency = await analyzeUrgency(text);
+        } catch (e) {
+            urgency = 1;
+        }
+
+        try {
+            summary = await analyzeSummary(text);
+        } catch (e) {
+            summary = text;
+        }
+
+        resolve([email, text, urgency, summary]);
+    });
+}
+
 const getEmails = async () => {
-    chrome.storage.local.get(['gmail_token'], (result) => {
+    chrome.storage.local.get(['gmail_token', 'emails'], (result) => {
         if (result?.gmail_token != undefined) {
             // Get most recent emails
             fetch(`https://gmail.googleapis.com/gmail/v1/users/me/messages?maxResults=25&q=${encodeURI('in:inbox is:unread category:primary')}`, {
@@ -126,27 +223,66 @@ const getEmails = async () => {
                 .then(res => {
                     console.log(res);
                     let parsedEmails = [];
+                    let analysisPromises = [];
+
+                    let alreadyExistingEmails = {};
+
+                    for (let oldEmail of result.emails) {
+                        alreadyExistingEmails[oldEmail.id] = oldEmail;
+                    }
+
+                    console.log(alreadyExistingEmails);
 
                     for (let email of res) {
-                        if (email?.payload?.parts?.length > 0 && email?.payload?.parts[0]?.body?.data !== undefined) {
-                            let urgencies = [1, 2, 3, 4, 5];
+                        if (alreadyExistingEmails[email.id]) {
+                            parsedEmails.push(alreadyExistingEmails[email.id]);
+                        } else if (email?.payload?.parts?.length > 0 && email?.payload?.parts[0]?.body?.data !== undefined) {
+                            let text = atob(decode(email.payload.parts[0].body.data)).replace(/\[.*\]/g, "").replace(/https?:\/\/.*?[\s+]/g, "");
+                            analysisPromises.push(analyzeEmails(email, text));
+                            // let urgencies = [1, 2, 3, 4, 5];
+                            // analyzeUrgency(text);
+
+                            // let parsedEmail = {
+                            //     timestamp: email.internalDate,
+                            //     subject: email.payload.headers.find(x => x.name.toLowerCase().trim() == 'subject').value,
+                            //     summary: "Coming soon!",
+                            //     urgency: await analyzeUrgency(text),
+                            //     url: `https://mail.google.com/mail/#inbox/${email.id}`,
+                            //     sender: email.payload.headers.find(x => x.name.toLowerCase().trim() == 'from').value,
+                            //     content: text,
+                            // };
+
+                            // parsedEmails.push(parsedEmail);
+                        }
+                    }
+
+                    Promise.all(analysisPromises)
+                    .then(res => {
+                        for (let data of res) {
+                            let email = data[0];
+                            let text = data[1];
+                            let urgency = data[2];
+                            let summary = data[3];
+
                             let parsedEmail = {
                                 timestamp: email.internalDate,
                                 subject: email.payload.headers.find(x => x.name.toLowerCase().trim() == 'subject').value,
-                                summary: "Coming soon!",
-                                urgency: urgencies[Math.floor(Math.random() * urgencies.length)],
+                                summary: summary,
+                                urgency: urgency,
                                 url: `https://mail.google.com/mail/#inbox/${email.id}`,
                                 sender: email.payload.headers.find(x => x.name.toLowerCase().trim() == 'from').value,
-                                content: atob(decode(email.payload.parts[0].body.data)).replace(/\[.*\]/g, "").replace(/https?:\/\/.*?[\s+]/g, "")
+                                content: text,
+                                id: email.id
                             };
 
                             parsedEmails.push(parsedEmail);
                         }
-                    }
 
-                    chrome.storage.local.set({
-                        emails: parsedEmails
-                    });
+                        chrome.storage.local.set({
+                            emails: parsedEmails
+                        });
+                    })
+                    .catch(err => console.error(err));
                 })
                 .catch(err => {
                     console.error(err);
