@@ -70,8 +70,12 @@ export default function Main() {
   return (
     <div className="p-3 pr-5">
       <NavBar />
+
       {isLoggedIn &&
-        <Dropdown sortMethod={sortMethod} setSortMethod={setSortMethod} />
+        <div>
+          <Dropdown sortMethod={sortMethod} setSortMethod={setSortMethod} />
+
+        </div>
       }
 
       {emailData && isLoggedIn ? emailData.map((email, index) => {
