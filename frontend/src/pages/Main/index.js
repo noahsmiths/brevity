@@ -10,10 +10,14 @@ export default function Main() {
   const [emailData, setEmailData] = useState([]);
   const [hasEmailData, setHasEmailData] = useState(false);
   const [sortMethod, setSortMethod] = useState('urgency');
+  const [isLoggedIn, setIsLoggedIn] = useState('false');
 
   const getEmailData = () => {
     if (chrome?.storage?.local) {
-      chrome.storage.local.get(['emails'], (result) => {
+      chrome.storage.local.get(['emails', 'gmail_token'], (result) => {
+        if (result?.gmail_token) {
+          setIsLoggedIn(true);
+        }
         if (result?.emails?.length > 0) {
           // Do what you will with emails here
           /*
