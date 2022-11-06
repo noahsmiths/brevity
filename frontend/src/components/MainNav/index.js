@@ -8,13 +8,13 @@ const NavBar = () => {
 
   return (
     <div className="flex navbar bg-white p-0">
-      <div className="flex-1">
-
+      <div className="flex-none w-[50px]">
+        &nbsp;
       </div>
-      <div className="flex-none">
+      <div className="flex-1 flex justify-center">
         <img src={logo} alt="Brevity Icon" className="max-h-7" />{" "}
       </div>
-      <div className="flex justify-end flex-1 px-2">
+      <div className="flex justify-end w-[50px] px-2">
         <div className="flex items-stretch">
           <div className="">
             <div className="tooltip tooltip-left" data-tip="Settings">

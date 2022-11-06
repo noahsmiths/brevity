@@ -5,7 +5,11 @@
   "manifest_version": 3,
   "action": {
     "default_popup": "index.html",
-    "default_title": "Open the popup"
+    "default_title": "Open the popup",
+    "default_icon": {
+      "48": "/BrevityIcon-48.png",
+      "128": "/BrevityIcon-128.png"
+    }
   },
   "permissions": [
     "storage"
