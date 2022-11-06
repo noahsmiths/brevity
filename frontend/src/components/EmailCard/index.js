@@ -26,18 +26,18 @@ export default function EmailCard({ props }) {
   return (
     <a href={props.url}>
       <div className="card w-full mt-1 bg-base-ß100 border-0.2 border-softgray shadow-xl p-3 flex flex-row scale-[.975] hover:scale-100 hover:underline hover:cursor-pointer">
-        <div class="w-11 pr-2">
+        <div class="w-11 pr-2 align-top">
           <div
-            class={`rounded-full mt-6 h-6 w-6 ml-1 ${calculateUrgency(
+            class={`rounded-full h-6 w-6 ml-1 ${calculateUrgency(
               props.urgency
             )}`}
           ></div>
         </div>
-        <div class="flex flex-col">
-          <p class="text-lg font-bold">{props.subject}</p>
+        <div class="flex-1 flex-col">
+          <p class="text-sm font-bold">{props.subject}</p>
           <p class="text-sm w-full text-gray-500">{props.summary}</p>
         </div>
-        <div className="">
+        <div className="flex-none">
           <div
             className="tooltip tooltip-left h-[10]"
             data-tip={props.timestamp}
