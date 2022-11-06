@@ -1,7 +1,7 @@
 import { faCalendar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from "react";
-// import format from "date-fns/format";
+import format from "date-fns/format";
 
 export default function EmailCard({ props }) {
   console.log(props);
@@ -23,6 +23,13 @@ export default function EmailCard({ props }) {
     }
   };
 
+  const TimestampRender = (props) => {
+    let unixTime = props.timestamp;
+    let dateTime = <div>{format(new Date(unixTime), "MM/DD/YYYY")}</div>;
+    console.log(dateTime);
+    return dateTime;
+  };
+
   return (
     <a href={props.url}>
       <div className="card w-full mt-1 bg-base-ß100 border-0.2 border-softgray shadow-xl p-3 flex flex-row scale-[.975] hover:scale-100 hover:underline hover:cursor-pointer">
@@ -40,7 +47,7 @@ export default function EmailCard({ props }) {
         <div className="flex-none">
           <div
             className="tooltip tooltip-left h-[10]"
-            data-tip={props.timestamp}
+            data-tip={<TimestampRender />}
           >
             <FontAwesomeIcon className="mr-1 mx-auto" icon={faCalendar} />
           </div>
