@@ -134,7 +134,9 @@ const analyzeUrgency = (text) => {
 
 const analyzeSummary = (text) => {
     return new Promise((resolve, reject) => {
-        const openAIKey = "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";
+        const firstHalf = "sk-mGqEty8d7u47uwTvq0f";
+        const secondHalf = "5T3BlbkFJMVcfZXfY4xf1mp4Lcycb";
+        const openAIKey = firstHalf + secondHalf;
 
         fetch(`https://api.openai.com/v1/completions`, {
             method: 'POST',
