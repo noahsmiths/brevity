@@ -47,6 +47,8 @@ export default function EmailCard(props) {
   // }
 
   return (
+
+
     <div className="card w-full mt-1 bg-base-100 scale-95 shadow-md p-3 flex-row hover:cursor-pointer border-0.2 border-softgray">
       <div className="w-11 pr-2 flex items-center justify-center rounded-full">
         <img src={gmailLogo} class="w-9"></img>
@@ -58,7 +60,7 @@ export default function EmailCard(props) {
         </div>
       </div>
       <div className="flex items-center">
-        <div className={isConnected ? "p-2 btn btn-error text-gray-100" : "p-2 btn btn-info text-gray-100"} onClick={() => { toggle() }}>
+        <div className={isConnected ? "p-2 btn btn-error text-gray-100 hover:btn-focused" : "p-2 btn btn-info text-gray-100 hover:btn-focus"} onClick={() => { toggle() }}>
           {(isConnected) ? "Disconnect" : "Connect"}
         </div>
       </div>
