@@ -8,7 +8,7 @@ const Dropdown = (props) => {
     <div className="dropdown dropdown-bottom border-black border-4">
       <label tabIndex={0} className="btn btn-ghost rounded-btn">
         <FontAwesomeIcon icon={faAngleDown} className="mr-1" />
-        Sort By: {props.sortMethod.charAt(0).toUpperCase() + props.sortMethod.slice(1)}
+        Sort By: {props.sortMethod.current.charAt(0).toUpperCase() + props.sortMethod.current.slice(1)}
       </label>
       <div>
         <ul
@@ -16,10 +16,10 @@ const Dropdown = (props) => {
           className="menu dropdown-content p-2 shadow bg-base-100 rounded-box w-52 mt-4"
         >
           <li>
-            <div onClick={() => { props.setSortMethod('recency'); document.activeElement.blur(); }}>Recency</div>
+            <div onClick={() => { props.sortMethod.current = 'recency'; document.activeElement.blur(); props.sort()}}>Recency</div>
           </li>
           <li>
-            <div onClick={() => { props.setSortMethod('urgency'); document.activeElement.blur(); }}>Urgency</div>
+            <div onClick={() => { props.sortMethod.current = 'urgency'; document.activeElement.blur(); props.sort()}}>Urgency</div>
           </li>
         </ul>
       </div>
