@@ -227,8 +227,10 @@ const getEmails = async () => {
 
                     let alreadyExistingEmails = {};
 
-                    for (let oldEmail of result.emails) {
-                        alreadyExistingEmails[oldEmail.id] = oldEmail;
+                    if (result?.emails?.length) {
+                        for (let oldEmail of result.emails) {
+                            alreadyExistingEmails[oldEmail.id] = oldEmail;
+                        }
                     }
 
                     console.log(alreadyExistingEmails);
