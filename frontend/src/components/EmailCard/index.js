@@ -1,5 +1,6 @@
 import { faCalendar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { format } from "date-fns";
 import React from "react";
 
 export default function EmailCard({ props }) {
@@ -39,7 +40,7 @@ export default function EmailCard({ props }) {
       <div className="flex-none">
         <div
           className="tooltip tooltip-left h-[10]"
-          data-tip={new Date(props.timestamp * 1000)}
+          data-tip={format(new Date(+props.timestamp), 'yyyy-MM-dd')}
         >
           <FontAwesomeIcon className="mr-1 mx-auto" icon={faCalendar} />
         </div>
