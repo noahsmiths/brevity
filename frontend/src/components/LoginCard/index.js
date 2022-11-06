@@ -30,7 +30,8 @@ export default function EmailCard(props) {
 
   const toggle = () => {
     if (isConnected) {
-      chrome.storage.local.remove("gmail_token");
+      //chrome.storage.local.remove(["gmail_token"]);
+      chrome.storage.local.clear();
       setIsConnected(false);
     } else {
       handleGmailLogin();

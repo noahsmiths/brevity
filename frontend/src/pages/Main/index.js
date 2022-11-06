@@ -40,6 +40,7 @@ export default function Main() {
             setIsLoggedIn(false);
           }
           if (result?.emails?.length > 0) {
+            console.log('SETTING EMAILS');
             // Do what you will with emails here
 
             // Code to sort by urgency
@@ -52,7 +53,7 @@ export default function Main() {
 
             //setEmailData(result.emails);
             setHasEmailData(true)
-            console.log(result);
+            // console.log(result);
           } else {
             setHasEmailData(false);
             console.warn("Data couldn't be loadedß")
@@ -62,7 +63,13 @@ export default function Main() {
     }
 
     getEmailData();
-  }, [])
+
+    let interval = setInterval(getEmailData, 1000);
+
+    return () => {
+      clearInterval(interval);
+    }
+  }, []);
 
   // useEffect(() => {
   //   sortEmails();
@@ -80,8 +87,8 @@ export default function Main() {
       }
 
       {emailData && isLoggedIn ? emailData.map((email, index) => {
-        console.log(`key: ${index} \n pair: ${email}`);
-        console.log(email);
+        // console.log(`key: ${index} \n pair: ${email}`);
+        // console.log(email);
         return (
           <div>
             <EmailCard props={email} />
