@@ -21,8 +21,8 @@ export default function SettingsNav() {
                 <div className="flex-initial">
                     <img src={logo} alt="Brevity Icon" className="max-h-7" />{" "}
                 </div>
-                <div className="flex-1">
-
+                <div className="flex-1 flex justify-end">
+                    <ThemeToggle />
                 </div>
             </div>
         </main >
