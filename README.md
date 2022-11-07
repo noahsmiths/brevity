@@ -1,4 +1,5 @@
 # Brevity
+**Brevity was the 2nd place winner in HackNC 2022, read more about it @ https://devpost.com/software/brevity-sh05n6**
 
 ## What it does
 Brevity is a chrome extension that programmatically ranks your emails based on their urgency and importance. 
