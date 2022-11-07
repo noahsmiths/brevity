@@ -1,5 +1,7 @@
 # brevity
 
+https://d112y698adiu2z.cloudfront.net/photos/production/software_photos/002/282/156/datas/gallery.jpg
+
 ## What it does
 Brevity is a chrome extension that programmatically ranks your emails based on their urgency and importance. 
 Additionally, Brevity provides a short summary of each email, captured by only a few sentences.
